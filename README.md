@@ -62,6 +62,4 @@ Enter next value: 10
 Enter next value: 
 ```
 
-_**Hint** You'll now have to update the pointer to the current element in two places, so why not add a function with signature `void move(int*, int**, int)`? Notice the second parameter is of type `int**` (pointer to a pointer). What does it mean? Ask your favorite GAI!_
-
 _**Hint** Don't bother thinking about non-integer inputs, we'll assume we have nice users who will always input integers!_
