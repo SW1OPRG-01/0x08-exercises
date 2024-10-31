@@ -1,25 +1,51 @@
+#include <stdlib.h>
 #include <stdio.h>
 
-void init(int* buf, int buf_size);
-void move(int* buf, int** indexer, int size);
+void display(int*, int);
+void init_buffer(int*, int);
+void move(int*, int**, int); 
 
 int main(int argc, char* argv[]) {
-  printf("Circular buffer\n");
-  int buffer[255]; // what does this mean in terms of the maximum size for our ring buffer?
+  int buffer_size = atoi(argv[1]);
+  int buffer[255];
+  init_buffer(buffer, buffer_size);
+  int *current = buffer;
   
-  // Read the length of the buffer from argv (hint: remember index 0 is the program name)
+  for(int i = 2; i < argc; i++) {
+    *current = atoi(argv[i]);
+    display(buffer, buffer_size);
+    move(buffer, &current, buffer_size);
+  }
 
-  // initialize the buffer with the correct length
+  int input;
+  while(1) {
+    printf("Enter next value: ");
+    scanf("%d", &input);
+    *current = input;
+    display(buffer, buffer_size);
+    move(buffer, &current, buffer_size);
+  }
 
   return 0;
 }
 
-void init(int* buf, int count) {
+void display(int* array, int count) {
   for(int i = 0; i < count; i++) {
-    buf[i] = 0;
+    printf("%d ", array[i]);
+  }
+  printf("\n");
+}
+
+void init_buffer(int* array, int count) {
+  for(int i = 0; i < count; i++) {
+    array[i] = 0;
   }
 }
 
-void move(int* buf, int** indexer, int size) {
-  // Add the implementation
+void move(int* buffer, int** indexer, int size) {
+    if(*indexer == buffer + size - 1) {
+      *indexer = buffer;
+    } else {
+      *indexer += 1;
+    }
 }
