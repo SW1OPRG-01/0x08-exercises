@@ -7,10 +7,13 @@
       "command": "gcc",
       "args": [
         "-g",
-        "src/*.c",
+        "main.c",
         "-o",
-        "${workspaceFolder}/build/${workspaceFolderBasename}.out"
+        "${workspaceFolder}/build/circular_buffer"
       ],
+      "options": {
+        "cwd": "${workspaceFolder}/src"
+      },
       "group": {
         "kind": "build",
         "isDefault": true
