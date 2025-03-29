@@ -1,21 +1,32 @@
 # Lecture 09 Exercises
 
-## Exercise 0x00 Circular buffer with arrays
-A circular buffer (also known as ring buffers or cyclic buffers) works like a normal list, except that if the number of values exceeds the capacity of the buffer, the oldest value will be overwritten. Circular buffers are widely used in real-world scenarios, like logging, where older entries are overwritten to save disk space, or data streaming, where data is continuously produced and consumed (like when we're watching Netfilx, Twitch or YouTube). 
+# Circular buffer with arrays
+A circular buffer (also known as a ring buffer or cyclic buffer) is similar to a regular list, but with a key difference: when the number of stored values exceeds the buffer’s capacity, the oldest value is overwritten. Circular buffers are commonly used in real-world applications such as:
+- Logging, where older entries are replaced to conserve disk space.
+- Data streaming, where data is continuously produced and consumed (e.g., when streaming on Netflix, Twitch, or YouTube).
 
-The task is to write a program in C that implements a circular buffer, that can contain a number of integer values.
+Write a C program that implements a circular buffer capable of storing integer values.
 
-### Requirements
-- The program shall accept an arbitrary (between 0 and 255) number of arguments where
-  - the value at index 1 specifies the size of the buffer (how many values it can hold)
-  - any subsequent arguments will be stored in the buffer (initialization)
-- If maximum capacity is reached
-  - values should be overwritten according to the first-in-first-out (FIFO) principle (always the oldest value)
-- The content of the array shall be displayed whenever a value is added (printed to the standard output)
+**Requirements**
+- The program should accept an arbitrary number of arguments (between 0 and 255), where:
+  - The first argument (index 1) specifies the buffer size (the maximum number of values it can hold).
+  - Any subsequent arguments initialize the buffer with values.
+- If the buffer reaches its maximum capacity:
+  - New values should overwrite the oldest ones, following the first-in, first-out (FIFO) principle.
+- Whenever a value is added, the program should print the current buffer contents to standard output.
 
-Since we're working with argument to `main()`, we'll have to set those in Visual Studio. To set command-line arguments in Visual Studio, right click on the project name, then go to 'Properties'. In the Properties Pane, go to "Debugging", and in this pane is a line for "Command-line arguments." Add the values you would like to use on this line. They will be passed to the program via the `argv` array.
+_**Hint** The first arguments is always the executable name_
+_**Hint** It is probably not a good idea to use the subscript operator (`[]`) when reading and writing values in the buffer_
 
-##### Example output
+**Passing command-line arguments to the debugger**
+Since the program takes command-line arguments, you’ll need to configure them in VSCode:
+1. Open `launch.json`.
+2. Locate the `args` field.
+3. Modify the values as needed (a sample configuration is provided, but feel free to change it).
+
+You can also call the program from a terminal as shown below:
+
+**Example output**
 ```
 $ ./main-array.o 4 1 2 3 4 5 6
 1 0 0 0
@@ -26,8 +37,8 @@ $ ./main-array.o 4 1 2 3 4 5 6
 5 6 3 4
 ```
 
-##### Handout
-It might be a good idea to initialize the array to make it easier read the output, here is a function that does that
+**Handout**
+It's a good idea to initialize the array to make it easier debug. Here is a function that does that
 ```c
 void init(int* array, int count) {
   for(int i = 0; i < count; i++) {
@@ -36,14 +47,10 @@ void init(int* array, int count) {
 }
 ```
 
-_**Hint** The first arguments is always the executable name_
-
-_**Hint** It is probably not a good idea to use the subscript operator (`[]`) when reading and writing values in the buffer_
-
-## Exercise 0x01 – Add new values
+## Add new values
 Extend the program from [Exercise 0x00](#exercise-0x00-circular-buffer-with-arrays) to prompt the user to enter new integers in an infinite loop.
 
-##### Example output
+**Example output**
 ```
 $ ./main-array.o 8 1 2 3 4 5 6 7     
 1 0 0 0 0 0 0 0 
@@ -62,4 +69,4 @@ Enter next value: 10
 Enter next value: 
 ```
 
-_**Hint** Don't bother thinking about non-integer inputs, we'll assume we have nice users who will always input integers!_
+_**Hint** Don't worry about non-integer inputs—we'll assume our users are nice and will always enter integers!_
